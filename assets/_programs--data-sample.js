@@ -1,4 +1,4 @@
-[
+const Programs = [
   {
     "ProgramID": 100,
     "Name": "Yoga Classes",
@@ -129,4 +129,6 @@
       ]
     }
   }
-]
+];
+
+export default Programs;
