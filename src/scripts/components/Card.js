@@ -3,13 +3,13 @@ import {
 } from 'hyperapp';
 
 import { 
-  moneyCommaPlacer,
-} from './../util/moneyCommaPlacer.js';
+  commaPlacer,
+} from './../util/commaPlacer.js';
 
 const PricingOption = ({ name, sales }) => (
   <tr>
     <td>{name}</td>
-    <td>${moneyCommaPlacer(sales)}</td>
+    <td>${commaPlacer(sales)}</td>
   </tr>
 );
 const PricingOptionTable = (props) => (
@@ -62,7 +62,7 @@ const Card = (props) => (
           </tr>
           <tr>
             <td>Sales</td>
-            <td>${moneyCommaPlacer(props.program.TotalMonthlySales)}</td>
+            <td>${commaPlacer(props.program.TotalMonthlySales)}</td>
             <td><img src={'/assets/spark_line.png'} /></td>
           </tr>
         </tbody>

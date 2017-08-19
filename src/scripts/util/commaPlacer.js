@@ -3,7 +3,7 @@
 
   @returns number with comma in ever third position from right.
 */
-export function moneyCommaPlacer(val) {
+export function commaPlacer(val) {
   // collect value and make sure it's a string
   var value = `${val}`;
   var floatingNumbers = '';

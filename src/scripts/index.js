@@ -14,6 +14,7 @@ import 'whatwg-fetch';
 
 import Header from './components/Header.js';
 import Card from './components/Card.js';
+import SingleProgram from './components/SingleProgram.js';
 
 app({
   root: document.getElementById('mount'),
@@ -105,11 +106,7 @@ app({
               <th>Monthly Sales</th>
               <th>Monthly Attendance</th>
             </tr>
-            <tr>
-              <td>Open Practice</td>
-              <td>$23,438</td>
-              <td><img src={'/assets/spark_line.png'} /></td>
-            </tr>
+            {state.programs.map((program) => <SingleProgram program={program} />)}
           </tbody>
         </table>
       </main>
