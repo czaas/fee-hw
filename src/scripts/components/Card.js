@@ -57,10 +57,10 @@ function PricingOptionTable(props) {
   Animation calculation happening here:
   CSS: transition: height; overflow: hidden;
 
-  - If visible, multiplies the amount of current options based on the height of each one (the + 1 is to account for the static headers)
+  - If visible, multiplies the amount of current options based on the height of each one (the + 1 is to account for the static headers and the last plus 1 accounts for the bottom border)
   - Else not visible height of component is zero. 
   */
-  var currentHeight = { height: (props.isVisible) ? `${(currentOptions.length + 1) * 20}px` : '0' };
+  var currentHeight = { height: (props.isVisible) ? `${((currentOptions.length + 1) * 20) + 1}px` : '0' };
 
   return (
     <div class="card__bottom-sales__table-wrapper" style={currentHeight}>
@@ -70,19 +70,13 @@ function PricingOptionTable(props) {
           <th>Current</th>
           <th>1 - Year</th>
         </tr>
-        <tr>
-          <td colspan="2">
-            {currentOptions.map((eachOption) => (
-              <tr>
-                <td>{eachOption.Name}</td>
-                <td>${commaPlacer(eachOption.Sales)}</td>
-              </tr>
-            ))}
-          </td>
-          <td class="card__bottom-sales__table__multi-graph">
-            
-          </td>
-        </tr>
+        {currentOptions.map((eachOption) => (
+          <tr>
+            <td>{eachOption.Name}</td>
+            <td>${commaPlacer(eachOption.Sales)}</td>
+            <td class="card__bottom-sales__table__multi-graph">&nbsp;</td>
+          </tr>
+        ))}
       </table>
     </div>
   );

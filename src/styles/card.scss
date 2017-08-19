@@ -1,23 +1,8 @@
-.cards {
-  display: flex; 
-  align-items: flex-start;
-  align-content: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 777px;
-  margin: 0 auto 30.5px;
-
-  @media screen and (max-width: 776px) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-}
-
 .card {
-  width: 245px;
+  width: 100%;
+  max-width: 245px;
   padding: 20px 20px 8px;
-  margin: 10.5px 0;
+  margin: 10.5px 9.5px;
 
   background: #fff;
   border-radius: .2rem;
@@ -109,13 +94,16 @@
     &__table {
       font-size: 11px;
       text-align: left;
+      border-collapse: collapse;
+      background: url(/assets/spark_lines.png) repeat-y 100% 20px;
+      background-size: 65px 140px;
 
-      tr {
+      tr:not(:first-child) {
         border-bottom: 1px solid #f3f3f3;
       }
 
       & > tr:first-child {
-
+        background: #fff;
         th {
           font-weight: 400;
           color: #c6c6ba;
@@ -154,8 +142,6 @@
       &__multi-graph {
         min-width: 65px;
         height: 100%;
-        background: url(/assets/spark_lines.png) repeat-y top center;
-        background-size: 65px 140px;
       }
     }
   }

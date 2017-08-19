@@ -1,10 +1,16 @@
 $tablet: 768px;
+$desktop-break: 994px;
 @import './fonts.scss';
 
 body {
   margin: 0;
   background: #e5e4db;
   font-family: 'Noto Sans', sans-serif;
+  padding-bottom: 125px;
+
+  @media screen and (min-width: $desktop-break) { 
+    padding-bottom: 0;
+  }
 }
 
 * {

@@ -20,13 +20,11 @@ import SingleProgram from './components/SingleProgram.js';
 
 const MainWrapper = (props) => (
   <div class="main-wrapper">
-    <aside class="aside">
-      <div>
-        <a>+</a>
+    <aside class="main-wrapper__aside aside">
+        <a class="aside__button"><img src={'/assets/plus_icon.png'} /></a>
         New Program
-      </div>
     </aside>
-    <main class="main">
+    <main class="main-wrapper__main main">
       <div class="cards">
         {props.state.programs.map((program) => (
           <Card 

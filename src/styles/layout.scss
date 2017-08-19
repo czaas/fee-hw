@@ -1,11 +1,81 @@
 .main-wrapper {
+  width: 100%;
   max-width: calc(917px + 8%);
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   padding: 0 4%;
+
+  &__main {
+    flex: 1 1 100%;
+
+    @media screen and (min-width: $desktop-break) { 
+      padding-left: 66px;
+    }
+  }
 }
 
 .aside {
   width: 75px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 67px;
+    margin-bottom: 7px;
+    
+    border-radius: .2rem;
+    background: #a1c589;
+    border: 1px solid #7e9e6c;
+    box-shadow: inset 1px 1px 1px rgba(255,255,255,.4);
+    cursor: pointer;
+
+    transition: background .2s ease-out, box-shadow .2s ease-out;
+
+    &:hover, &:active {
+      background: darken(#a1c589, 5%);
+      box-shadow: inset 1px 1px 1px rgba(255,255,255,.6);
+    }
+  }
+
+
+  @media screen and (min-width: $desktop-break) {
+    position: static;
+    margin-top: 10.5px;
+  }
+}
+
+.cards {
+  display: flex; 
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  
+  margin: 0 auto 30.5px;
+  justify-content: center;
+
+  @media screen and (min-width: 574px) {
+    justify-content: flex-start;
+    max-width: 528px;
+  }
+
+  @media screen and (min-width: 850px) {
+    max-width: 777px;
+    &__card {
+      &:nth-child(3n+1) {
+        margin-left: 0;
+      }
+      &:nth-child(3n+3) {
+        margin-right: 0;
+      }
+    }
+  }
 }
