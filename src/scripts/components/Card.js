@@ -36,10 +36,17 @@ const PricingOptionTable = (props) => (
   </table>
 );
 
+
+
+/*
+# Card
+
+Main component to be exported. 
+*/
 const Card = (props) => (
   <div>
     <div>
-      <h2>Card</h2>
+      <h2>{props.program.Name}</h2>
       <img src={'/assets/pencil_icons.png'} />
     </div>
     <p>Sales by month</p>
@@ -63,11 +70,11 @@ const Card = (props) => (
       </table>
       <div>
         <PricingOptionTable 
-          pricingOptions={PRICING_OPTIONS} 
-          ProgramID={props.ProgramID} 
-          styles={{ display: (props.visiblePricingTables[`id${props.ProgramID}`]) ? 'block' : 'none' }} 
+          pricingOptions={props.pricingOptions} 
+          ProgramID={props.program.ProgramID} 
+          styles={{ display: (props.visiblePricingTables[`id${props.program.ProgramID}`]) ? 'block' : 'none' }} 
         />
-        <p onclick={() => props.togglePricingTable(props.ProgramID)}>{(props.visiblePricingTables[`id${props.ProgramID}`]) ? 'less' : 'more'}</p>
+        <p onclick={() => props.togglePricingTable(props.program.ProgramID)}>{(props.visiblePricingTables[`id${props.program.ProgramID}`]) ? 'less' : 'more'}</p>
       </div>
     </section>
   </div>
