@@ -65,11 +65,12 @@
     background: #fbfbf6;
     border-top: 1px solid #f5f5eb;
     border-bottom: 1px solid #f1f1f0;
-    padding: 0 20px;
+    padding: 10px 20px 5px;
 
     &__table {
       width: 100%;
       text-align: center;
+      border-collapse: collapse;
 
       th {
         font-size: 11px;
@@ -122,12 +123,14 @@
           &:first-child {
             font-size: 13px;
           }
+
+          &:last-child {
+            text-align: center;
+          }
         }
       }
 
       td[colspan="2"] {
-        padding: 0;
-
         td:last-child {
           color: #c2bbb4;
         }
@@ -146,6 +149,13 @@
         white-space: nowrap;
         font-size: 12px;
         color: #828272;
+      }
+
+      &__multi-graph {
+        min-width: 65px;
+        height: 100%;
+        background: url(/assets/spark_lines.png) repeat-y top center;
+        background-size: 65px 140px;
       }
     }
   }
