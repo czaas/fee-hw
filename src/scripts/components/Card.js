@@ -2,17 +2,16 @@ import {
   h,
 } from 'hyperapp';
 
-
-import PRICING_OPTIONS from './../../../assets/_pricing-options--data-sample.js';
-// console.log(PRICING_OPTIONS);
+import { 
+  moneyCommaPlacer,
+} from './../util/moneyCommaPlacer.js';
 
 const PricingOption = ({ name, sales }) => (
   <tr>
     <td>{name}</td>
-    <td>${sales}</td>
+    <td>${moneyCommaPlacer(sales)}</td>
   </tr>
 );
-
 const PricingOptionTable = (props) => (
   <table style={props.styles}>
     <tr>
@@ -63,7 +62,7 @@ const Card = (props) => (
           </tr>
           <tr>
             <td>Sales</td>
-            <td>$23,438</td>
+            <td>${moneyCommaPlacer(props.program.TotalMonthlySales)}</td>
             <td><img src={'/assets/spark_line.png'} /></td>
           </tr>
         </tbody>
