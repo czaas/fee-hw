@@ -1,5 +1,10 @@
+$tablet: 768px;
+@import './fonts.scss';
+
 body {
   margin: 0;
+  background: #e5e4db;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 * {
@@ -9,4 +14,6 @@ body {
   }
 }
 
+@import './layout.scss';
 @import './header.scss';
+@import './card.scss';

@@ -6,34 +6,43 @@ import {
   commaPlacer,
 } from './../util/commaPlacer.js';
 
-const PricingOption = ({ name, sales }) => (
-  <tr>
-    <td>{name}</td>
-    <td>${commaPlacer(sales)}</td>
-  </tr>
-);
-const PricingOptionTable = (props) => (
-  <table style={props.styles}>
-    <tr>
-      <th>Price Name</th>
-      <th>Current</th>
-      <th>1 - Year</th>
-    </tr>
-    <tr>
-      <td colspan="2">
-        {props.pricingOptions.map((eachOption) => {
-            if (parseInt(props.ProgramID, 10) === eachOption.ProgramID) {
-              return <PricingOption name={eachOption.Name} sales={eachOption.Sales} />;
-            }
-          }
-        )}
-      </td>
-      <td>
-        <img src={'/assets/spark_lines.png'} />
-      </td>
-    </tr>
-  </table>
-);
+const PricingOptionTable = (props) => {
+  var currentOptions = props.pricingOptions.filter((eachOption) => eachOption.ProgramID === parseInt(props.ProgramID, 10));
+
+  /*
+  Animation calculation happening here:
+  CSS: transition: height; overflow: hidden;
+
+  - If visible, multiplies the amount of current options based on the height of each one
+  - Else not visible height of component is zero. 
+  */
+  var currentHeight = { height: (props.isVisible) ? `${(currentOptions.length + 2) * 20}px` : '0' };
+
+  return (
+    <div class="card__bottom-sales__table-wrapper" style={currentHeight}>
+      <table class={`card__bottom-sales__table`}>
+        <tr>
+          <th>Price Name</th>
+          <th>Current</th>
+          <th>1 - Year</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            {currentOptions.map((eachOption) => (
+              <tr>
+                <td>{eachOption.Name}</td>
+                <td>${commaPlacer(eachOption.Sales)}</td>
+              </tr>
+            ))}
+          </td>
+          <td>
+            <img src={'/assets/spark_lines.png'} />
+          </td>
+        </tr>
+      </table>
+    </div>
+  );
+};
 
 
 
@@ -43,17 +52,17 @@ const PricingOptionTable = (props) => (
 Main component to be exported. 
 */
 const Card = (props) => (
-  <div>
-    <div>
-      <h2>{props.program.Name}</h2>
-      <img src={'/assets/pencil_icons.png'} />
+  <div class="card cards__card">
+    <div class="card__top">
+      <h2 class="card__top__name">{props.program.Name}</h2>
+      <div class="card__top__edit" />
     </div>
-    <p>Sales by month</p>
+    <p class="card__graph-sales">Sales by month</p>
 
-    <img src={'/assets/graph.png'} />
+    <img class="card__graph" src={'/assets/graph.png'} />
 
-    <section>
-      <table>
+    <section class="card__current-sales">
+      <table class="card__current-sales__table">
         <tbody>
           <tr>
             <th>Total Monthly</th>
@@ -61,20 +70,20 @@ const Card = (props) => (
             <th>1 - Year</th>
           </tr>
           <tr>
-            <td>Sales</td>
+            <th>Sales</th>
             <td>${commaPlacer(props.program.TotalMonthlySales)}</td>
             <td><img src={'/assets/spark_line.png'} /></td>
           </tr>
         </tbody>
       </table>
-      <div>
-        <PricingOptionTable 
-          pricingOptions={props.pricingOptions} 
-          ProgramID={props.program.ProgramID} 
-          styles={{ display: (props.visiblePricingTables[`id${props.program.ProgramID}`]) ? 'block' : 'none' }} 
-        />
-        <p onclick={() => props.togglePricingTable(props.program.ProgramID)}>{(props.visiblePricingTables[`id${props.program.ProgramID}`]) ? 'less' : 'more'}</p>
-      </div>
+    </section>
+    <section class="card__bottom-sales">
+      <PricingOptionTable 
+        pricingOptions={props.pricingOptions} 
+        ProgramID={props.program.ProgramID} 
+        isVisible={props.visiblePricingTables[`id${props.program.ProgramID}`]}
+      />
+      <p class="card__bottom-sales__table-toggle" onclick={() => props.togglePricingTable(props.program.ProgramID)}>{(props.visiblePricingTables[`id${props.program.ProgramID}`]) ? 'less' : 'more'}</p>
     </section>
   </div>
 );

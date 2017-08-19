@@ -16,13 +16,49 @@ import Header from './components/Header.js';
 import Card from './components/Card.js';
 import SingleProgram from './components/SingleProgram.js';
 
+
+
+const MainWrapper = (props) => (
+  <div class="main-wrapper">
+    <aside class="aside">
+      <div>
+        <a>+</a>
+        New Program
+      </div>
+    </aside>
+    <main class="main">
+      <div class="cards">
+        {props.state.programs.map((program) => (
+          <Card 
+            program={program} 
+            pricingOptions={props.state.pricingOptions}
+            togglePricingTable={props.actions.togglePricingTable} 
+            visiblePricingTables={props.state.visiblePricingTables} 
+          />
+        ))}
+      </div>
+      
+      <table>
+        <tbody>
+          <tr>
+            <th>All Programs</th>
+            <th>Monthly Sales</th>
+            <th>Monthly Attendance</th>
+          </tr>
+          {props.state.programs.map((program) => <SingleProgram program={program} />)}
+        </tbody>
+      </table>
+    </main>
+  </div>
+);
+
 app({
   root: document.getElementById('mount'),
 
   state: {
     programs: [],
     pricingOptions: [],
-    visiblePricingTables: [],
+    visiblePricingTables: {},
   },
 
 
@@ -81,35 +117,10 @@ app({
   view: (state, actions) => (
     <div>
       <Header />
-      <aside>
-        <div>
-          <a>+</a>
-          New Program
-        </div>
-      </aside>
-      <main>
-        <div class="cards">
-          {state.programs.map((program) => (
-            <Card 
-              program={program} 
-              pricingOptions={state.pricingOptions}
-              togglePricingTable={actions.togglePricingTable} 
-              visiblePricingTables={state.visiblePricingTables} 
-            />
-          ))}
-        </div>
-        
-        <table>
-          <tbody>
-            <tr>
-              <th>All Programs</th>
-              <th>Monthly Sales</th>
-              <th>Monthly Attendance</th>
-            </tr>
-            {state.programs.map((program) => <SingleProgram program={program} />)}
-          </tbody>
-        </table>
-      </main>
+      <MainWrapper 
+        state={state} 
+        actions={actions} 
+      />
     </div>
   ),
 });
