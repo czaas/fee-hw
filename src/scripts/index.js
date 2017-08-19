@@ -10,33 +10,73 @@ import {
   app,
   h,
 } from 'hyperapp';
-
+import 'whatwg-fetch';
 
 import Header from './components/Header.js';
 import Card from './components/Card.js';
-
+import SingleProgram from './components/SingleProgram.js';
 
 app({
   root: document.getElementById('mount'),
 
   state: {
-    visiblePricingTables: {},
+    programs: [],
+    pricingOptions: [],
+    visiblePricingTables: [],
   },
+
+
+  events: {
+    /**
+    On application load, fetch for the data
+    */
+    loaded: (state, actions) => {
+      // fetching for programs
+      fetch('https://api.myjson.com/bins/5bdb3')
+        .then((res) => res.json())
+        .then((programData) => {
+          actions.updatePrograms(programData);
+        });
+
+      // fetching for pricing options
+      fetch('https://api.myjson.com/bins/47axv')
+        .then((res) => res.json())
+        .then((pricingData) => {
+          actions.updatePricingOptions(pricingData);
+        });
+    },
+  },
+
 
   actions: {
     /**
       @param {ProgramID} - number as param toggles the boolean
     */
-    togglePricingTable: (state, actions, data) => {
-      state.visiblePricingTables[`id${data}`] = !state.visiblePricingTables[`id${data}`];
-      
+    togglePricingTable: (state, actions, ProgramID) => {
+      state.visiblePricingTables[`id${ProgramID}`] = !state.visiblePricingTables[`id${ProgramID}`];
+
+      return state;
+    },
+
+    /**
+      @param {newPrograms} - array of programs to be added to current programs
+    */
+    updatePrograms: (state, actions, newPrograms) => {
+      state.programs = state.programs.concat(newPrograms);
+
+      return state;
+    },
+
+    /**
+      @param {newPricingOptions} - array of pricing options to be added to current pricing options
+    */
+    updatePricingOptions: (state, actions, newPricingOptions) => {
+      state.pricingOptions = state.pricingOptions.concat(newPricingOptions);
+
       return state;
     },
   },
 
-  events: {
-
-  },
 
   view: (state, actions) => (
     <div>
@@ -49,9 +89,14 @@ app({
       </aside>
       <main>
         <div class="cards">
-          <Card ProgramID="100" togglePricingTable={actions.togglePricingTable} visiblePricingTables={state.visiblePricingTables} />
-          <Card ProgramID="101" togglePricingTable={actions.togglePricingTable} visiblePricingTables={state.visiblePricingTables} />
-          <Card ProgramID="102" togglePricingTable={actions.togglePricingTable} visiblePricingTables={state.visiblePricingTables} />
+          {state.programs.map((program) => (
+            <Card 
+              program={program} 
+              pricingOptions={state.pricingOptions}
+              togglePricingTable={actions.togglePricingTable} 
+              visiblePricingTables={state.visiblePricingTables} 
+            />
+          ))}
         </div>
         
         <table>
@@ -61,11 +106,7 @@ app({
               <th>Monthly Sales</th>
               <th>Monthly Attendance</th>
             </tr>
-            <tr>
-              <td>Open Practice</td>
-              <td>$23,438</td>
-              <td><img src={'/assets/spark_line.png'} /></td>
-            </tr>
+            {state.programs.map((program) => <SingleProgram program={program} />)}
           </tbody>
         </table>
       </main>

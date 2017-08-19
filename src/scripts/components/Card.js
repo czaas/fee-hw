@@ -2,17 +2,16 @@ import {
   h,
 } from 'hyperapp';
 
-
-import PRICING_OPTIONS from './../../../assets/_pricing-options--data-sample.js';
-// console.log(PRICING_OPTIONS);
+import { 
+  commaPlacer,
+} from './../util/commaPlacer.js';
 
 const PricingOption = ({ name, sales }) => (
   <tr>
     <td>{name}</td>
-    <td>${sales}</td>
+    <td>${commaPlacer(sales)}</td>
   </tr>
 );
-
 const PricingOptionTable = (props) => (
   <table style={props.styles}>
     <tr>
@@ -36,10 +35,17 @@ const PricingOptionTable = (props) => (
   </table>
 );
 
+
+
+/*
+# Card
+
+Main component to be exported. 
+*/
 const Card = (props) => (
   <div>
     <div>
-      <h2>Card</h2>
+      <h2>{props.program.Name}</h2>
       <img src={'/assets/pencil_icons.png'} />
     </div>
     <p>Sales by month</p>
@@ -56,18 +62,18 @@ const Card = (props) => (
           </tr>
           <tr>
             <td>Sales</td>
-            <td>$23,438</td>
+            <td>${commaPlacer(props.program.TotalMonthlySales)}</td>
             <td><img src={'/assets/spark_line.png'} /></td>
           </tr>
         </tbody>
       </table>
       <div>
         <PricingOptionTable 
-          pricingOptions={PRICING_OPTIONS} 
-          ProgramID={props.ProgramID} 
-          styles={{ display: (props.visiblePricingTables[`id${props.ProgramID}`]) ? 'block' : 'none' }} 
+          pricingOptions={props.pricingOptions} 
+          ProgramID={props.program.ProgramID} 
+          styles={{ display: (props.visiblePricingTables[`id${props.program.ProgramID}`]) ? 'block' : 'none' }} 
         />
-        <p onclick={() => props.togglePricingTable(props.ProgramID)}>{(props.visiblePricingTables[`id${props.ProgramID}`]) ? 'less' : 'more'}</p>
+        <p onclick={() => props.togglePricingTable(props.program.ProgramID)}>{(props.visiblePricingTables[`id${props.program.ProgramID}`]) ? 'less' : 'more'}</p>
       </div>
     </section>
   </div>
