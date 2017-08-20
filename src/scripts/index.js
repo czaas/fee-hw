@@ -57,6 +57,7 @@ app({
     visiblePricingTables: {},
     activeNavId: 1,
     activeSubNav: '',
+    mmenuOpen: false,
   },
 
   events: {
@@ -120,6 +121,8 @@ app({
         state.activeNavId = newNavId;
         state.activeSubNav = ''; // reset subnav to use default
 
+        actions.toggleMmenu(false);
+
         return state;
       }
     },
@@ -133,6 +136,20 @@ app({
 
         return state;
       }
+    },
+
+    /**
+      @param {force} - optional boolean to force menu to be open/close 
+    */
+    toggleMmenu: (state, actions, force) => {
+
+      if (force !== undefined) {
+        state.mmenuOpen = force;
+      } else {
+        state.mmenuOpen = !state.mmenuOpen;
+      }
+
+      return state;
     },
   },
 

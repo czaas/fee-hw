@@ -123,33 +123,82 @@ const NavItems = [
   }, 
 ];
 
+/**
+  @param {props.state} - state of application
+  @param {props.actions} - actions available from application
+*/
 const Header = (props) => (
-  <header class="header">
-    <div class="header__logo">Urban Yogo</div>
-    <nav class="nav">
-      <div class="nav__mmenu">
+  <header class="header nav">
+      <div class="header__logo">Urban Yogo</div>
+      <MainNav 
+        updateMainNav={props.actions.updateMainNav}
+        activeNavId={props.state.activeNavId}
+      />
+
+      <div class="nav__mmenu-button" onclick={() => props.actions.toggleMmenu()}>
         <svg width="30" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"/></svg>
       </div>
-      <ul class="nav__tabs tabs">
-        {NavItems.sort((a, b) => a.order - b.order).map((nameItem) => (
-          <li onclick={() => props.actions.updateMainNav(nameItem.id)} class={`tabs__tab ${ props.state.activeNavId === nameItem.id ? 'tabs__tab--active' : '' }`}><a>{nameItem.name}</a></li>
-        ))}
-      </ul>
+      
+      <MMenu 
+        activeNavId={props.state.activeNavId}
+        updateMainNav={props.actions.updateMainNav}
+        mmenuOpen={props.state.mmenuOpen}
+      />
 
-      <div class="nav__subnav subnav">
-        <ul class="subnav__inner">
-          <SubNav 
-            activeSubNav={props.state.activeSubNav} 
-            activeChildren={NavItems.filter((navItem) => (navItem.id === props.state.activeNavId))[0].children} 
-            updateSubNav={props.actions.updateSubNav}
-          />
-        </ul>
-      </div>
-    </nav>
+      <SubNav 
+        activeSubNav={props.state.activeSubNav} 
+        activeChildren={NavItems.filter((navItem) => (navItem.id === props.state.activeNavId))[0].children} 
+        updateSubNav={props.actions.updateSubNav}
+      />
   </header>
 );
 
 
+
+/**
+  @param {props.activeNavId} - Current active nav id
+  @param {props.updateMainNav} - Action to update main nav
+  @param {props.mmenuOpen} - Current state on whether mmenu is open
+*/
+function MMenu(props) {
+  // Sorting by order, then removing the active item, and finally iterating and creating jsx objects
+  var mmenuItems = NavItems.sort((a, b) => a.order - b.order).filter((item) => item.id !== props.activeNavId).map((nameItem) => {
+    if (nameItem.id !== props.activeNavId) {
+      return <li onclick={() => props.updateMainNav(nameItem.id)} class={`${ props.activeNavId === nameItem.id ? '' : '' }`}><a>{nameItem.name}</a></li>;
+    }
+  });
+
+  var height = props.mmenuOpen ? mmenuItems.length * 44 : 0;
+
+  return (
+    <nav class="nav__mmenu" style={{ height: `${height}px` }}>
+      <ul class="mmenu">
+        {mmenuItems}
+      </ul>
+    </nav>
+  );
+}
+
+/**
+  @param {props.updateMainNav} - Action to update main nav
+  @param {props.activeNavId} - Current active nav id
+*/
+function MainNav(props) {
+  return (
+    <nav class="nav__main-nav">
+      <ul class="nav__main-nav__tabs tabs">
+        {NavItems.sort((a, b) => a.order - b.order).map((nameItem) => (
+          <li onclick={() => props.updateMainNav(nameItem.id)} class={`tabs__tab ${ props.activeNavId === nameItem.id ? 'tabs__tab--active' : '' }`}><a>{nameItem.name}</a></li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+/**
+  @param {props.activeChildren} - Array of subnav objects
+  @param {props.activeSubNav} - state of current active subnav item
+*/
 function SubNav(props) {
   var children = props.activeChildren.map((child) => {
     var currentActiveChild = false;
@@ -163,7 +212,11 @@ function SubNav(props) {
     return <li class={`subnav__item ${currentActiveChild ? 'subnav__item--active' : ''}`}><a onclick={() => props.updateSubNav(child.name)}>{child.name}</a></li>;
   });
 
-  return children;
+  return (
+    <nav class="nav__subnav subnav">
+      <ul class="subnav__inner">{children}</ul>
+    </nav>
+  );
 }
 
 export default Header;

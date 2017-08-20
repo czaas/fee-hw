@@ -13,21 +13,75 @@
     height: 51px;
     background: url(/assets/logo.png) no-repeat top left;
     background-size: contain;
-    margin: 0 auto;
+    margin: 0 auto 15px;
   }
 }
 
 .nav {
   position: relative;
 
-  &__mmenu {
-    cursor: pointer;
-    position: absolute; 
-    top: 28px;
-    right: 7px;
+  @media screen and (max-width: 822px) {
+    &__main-nav {
+      display: inline-block;
+      width: 100%;
+      max-width: 75%;
+      margin-left: 20px;
+    }
+  }
 
-    @media screen and (min-width: $desktop-break) { 
-      display: none;
+  &__main-nav {
+    @media screen and (min-width: 823px) {
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  &__mmenu-button {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 15px;
+  }
+
+  &__mmenu {
+    overflow: hidden;
+    height: 0;
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    max-width: calc(75% - 2px);
+    margin-left: 20px;
+    transition: height .2s ease-out;
+    border-left: 1px solid #b6c2c5;
+    border-right: 1px solid #b6c2c5;
+    left: 1px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #b6c2c5;
+        background: linear-gradient(to bottom, #fff, #eff2f1);
+        height: 44px;
+
+        &:first-child {
+          border-top: 1px solid  #b6c2c5;
+        }
+
+        &:hover {
+          background: linear-gradient(to bottom, #eff2f1, #fff);
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 823px) {
+    &__mmenu-button,
+    &__mmenu {
+      display: none !important;
     }
   }
 }
@@ -35,7 +89,7 @@
 .tabs {
   display: flex;
   justify-content: space-around;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   max-width: 822px;
   overflow: visible;
@@ -118,14 +172,16 @@
   }
 
   &__item {
-    color: blue;
-
+    color: #777;
     display: inline-block;
     vertical-align: top;
     margin-right: 15px;
+    cursor: pointer;
 
     &--active {
-      color: red;
+      cursor: default;
+      color: #5e5e5e;
+      font-weight: bold;
     }
   }
 }
