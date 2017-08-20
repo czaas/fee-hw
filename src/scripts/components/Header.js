@@ -129,16 +129,17 @@ const NavItems = [
 */
 const Header = (props) => (
   <header class="header nav">
-      <div class="header__logo">Urban Yogo</div>
-      <MainNav 
-        updateMainNav={props.actions.updateMainNav}
-        activeNavId={props.state.activeNavId}
-      />
+      <div class="header__top">
+        <div class="header__logo">Urban Yogo</div>
+        <MainNav 
+          updateMainNav={props.actions.updateMainNav}
+          activeNavId={props.state.activeNavId}
+        />
 
-      <div class="nav__mmenu-button" onclick={() => props.actions.toggleMmenu()}>
-        <svg width="30" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"/></svg>
+        <div class="header__mmenu-button" onclick={() => props.actions.toggleMmenu()}>
+          <svg width="30" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"/></svg>
+        </div>
       </div>
-      
       <MMenu 
         activeNavId={props.state.activeNavId}
         updateMainNav={props.actions.updateMainNav}
@@ -171,7 +172,7 @@ function MMenu(props) {
   var height = props.mmenuOpen ? mmenuItems.length * 44 : 0;
 
   return (
-    <nav class="nav__mmenu" style={{ height: `${height}px` }}>
+    <nav class="header__mmenu" style={{ height: `${height}px` }}>
       <ul class="mmenu">
         {mmenuItems}
       </ul>
@@ -185,8 +186,8 @@ function MMenu(props) {
 */
 function MainNav(props) {
   return (
-    <nav class="nav__main-nav">
-      <ul class="nav__main-nav__tabs tabs">
+    <nav class="header__main-nav">
+      <ul class="header__main-nav__tabs tabs">
         {NavItems.sort((a, b) => a.order - b.order).map((nameItem) => (
           <li onclick={() => props.updateMainNav(nameItem.id)} class={`tabs__tab ${ props.activeNavId === nameItem.id ? 'tabs__tab--active' : '' }`}><a>{nameItem.name}</a></li>
         ))}
@@ -213,7 +214,7 @@ function SubNav(props) {
   });
 
   return (
-    <nav class="nav__subnav subnav">
+    <nav class="header__subnav subnav">
       <ul class="subnav__inner">{children}</ul>
     </nav>
   );
