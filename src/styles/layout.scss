@@ -1,10 +1,32 @@
+body {
+  margin: 0;
+  background: #e5e4db;
+  font-family: 'Noto Sans', sans-serif;
+  padding-bottom: 125px;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(255,255,255,.3) 40%, rgba(255,255,255,.3) 50%);
+  }
+
+  @media screen and (min-width: $desktop-break) { 
+    padding-bottom: 50px;
+  }
+}
+
 .main-wrapper {
-  width: 100%;
-  max-width: calc(917px + 8%);
-  margin: 0 auto;
+  @include containerStyles;
+
   display: flex;
   justify-content: space-between;
-  padding: 0 4%;
 
   &__main {
     flex: 1 1 100%;

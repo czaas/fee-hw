@@ -1,0 +1,9 @@
+$tablet: 768px;
+$desktop-break: 994px;
+
+@mixin containerStyles {
+  width: 100%;
+  max-width: calc(917px + 8%);
+  margin: 0 auto;
+  padding: 0 4%;
+}

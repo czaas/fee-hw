@@ -26,37 +26,100 @@ const NavItems = [
     name: 'Sign In',
     order: 2,
     id: 2,
-    children: []
+    children: [{
+      name: 'Sign In',
+      order: 1,
+    }, {
+      name: 'More items',
+      order: 2,
+      default: true,
+    }, {
+      name: 'For Testing',
+      order: 3,
+    }]
   }, 
   {
     name: 'Classes',
     order: 3,
     id: 3,
-    children: []
+    children: [{
+      name: 'Classes',
+      order: 1,
+    }, {
+      name: 'More items again',
+      order: 2,
+      default: true,
+    }, {
+      name: 'Still Testing',
+      order: 3,
+    }, {
+      name: 'Again',
+      order: 4,
+    }]
   }, 
   {
     name: 'Workshops',
     order: 4,
     id: 4,
-    children: []
+    children: [{
+      name: 'Workshops',
+      order: 1,
+    }, {
+      name: 'Click me',
+      order: 2,
+    }, {
+      name: 'Default Active',
+      order: 3,
+      default: true,
+    }, {
+      name: 'Once again',
+      order: 4,
+    }]
   }, 
   {
     name: 'Appointments',
     order: 5,
     id: 5,
-    children: []
+    children: [{
+      name: 'Appointments',
+      order: 1,
+    }, {
+      name: 'A test',
+      order: 2,
+    }, {
+      name: 'For all tests',
+      order: 3,
+      default: true,
+    }, {
+      name: 'And once again',
+      order: 4,
+    }]
   }, 
   {
     name: 'Client Home',
     order: 6,
     id: 6,
-    children: []
+    children: [{
+      name: 'Client Home',
+      order: 1,
+    }, {
+      name: 'Click me',
+      order: 2,
+      default: true,
+    }]
   }, 
   {
     name: 'Retail',
     order: 7,
     id: 7,
-    children: []
+    children: [{
+      name: 'Retail',
+      order: 1,
+    }, {
+      name: 'Buy Stuff',
+      order: 2,
+      default: true,
+    }]
   }, 
 ];
 
@@ -69,17 +132,19 @@ const Header = (props) => (
       </div>
       <ul class="nav__tabs tabs">
         {NavItems.sort((a, b) => a.order - b.order).map((nameItem) => (
-          <li class={`tabs__tab ${ props.state.activeNavId === nameItem.id ? 'tabs__tab--active' : '' }`}><a onclick={() => props.actions.updateMainNav(nameItem.id)}>{nameItem.name}</a></li>
+          <li onclick={() => props.actions.updateMainNav(nameItem.id)} class={`tabs__tab ${ props.state.activeNavId === nameItem.id ? 'tabs__tab--active' : '' }`}><a>{nameItem.name}</a></li>
         ))}
       </ul>
 
-      <ul class="nav__subnav subnav">
-        <SubNav 
-          activeSubNav={props.state.activeSubNav} 
-          activeChildren={NavItems.filter((navItem) => (navItem.id === props.state.activeNavId))[0].children} 
-          updateSubNav={props.actions.updateSubNav}
-        />
-      </ul>
+      <div class="nav__subnav subnav">
+        <ul class="subnav__inner">
+          <SubNav 
+            activeSubNav={props.state.activeSubNav} 
+            activeChildren={NavItems.filter((navItem) => (navItem.id === props.state.activeNavId))[0].children} 
+            updateSubNav={props.actions.updateSubNav}
+          />
+        </ul>
+      </div>
     </nav>
   </header>
 );

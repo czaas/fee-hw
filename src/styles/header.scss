@@ -33,51 +33,99 @@
 }
 
 .tabs {
+  display: flex;
+  justify-content: space-around;
   margin: 0;
   padding: 0;
-  
-  &__tab:not(&__tab--active) {
-    @media screen and (max-width: $desktop-break - 1) {
+  max-width: 822px;
+  overflow: visible;
+  list-style: none;
+  border: 1px solid #d4e2e6;
+  border-bottom: none;
+  border-radius: .2rem .2rem 0 0;
+  height: 39px;
+  position: relative;
+  top: -1px;
+
+  &__tab {
+    flex: 1 1 auto;
+    height: 39px;
+    display: inline-block;
+    text-align: center;
+    background: linear-gradient(to bottom, #fff, #eff2f1);
+    cursor: pointer;
+    padding: 9px 15px 8px;
+    position: relative;
+
+    &:hover:not(&--active) {
+      background: linear-gradient(to bottom, #eff2f1, #fff);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      background: url(/assets/nav-border.png) no-repeat top left;
+      background-size: auto 100%;
+    }
+
+    &:last-child:after,
+    &--active:after {
       display: none;
     }
-  }
 
-  &__tab--active {
-    & > a {
+    &--active {
       position: relative;
-      top: 1px;
+      top: -3px;
       background: #fff;
-      width: calc(100% - 70px);
-      min-height: 50px;
-      margin-left: 20px;
-      border-radius: .2rem .2rem 0 0;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
+      height: 43px;
+      display: inline-block;
 
       border-left: 1px solid #adb7bb;
       border-top: 1px solid #b6c2c5;
       border-right: 1px solid #a6b2b6;
-    }
-  } 
+      border-radius: .2rem .2rem 0 0;
+      cursor: default;
 
-  &__tab {
-    &__children-wrapper {
-      background: #fff;
-      overflow-x: scroll;
-      padding: 20px;
-      white-space: nowrap;
-      z-index: 10;
-      border-top: 1px solid #cbcfd1;
-      border-bottom: 1px solid #cdccc0;
+      a {
+        position: relative;
+        top: 2px;
+      }
     }
-
-    &__children {
-      display: inline-block;
-      vertical-align: top;
-      margin-right: 15px;
+  }
+  
+  &__tab:not(&__tab--active) {
+    @media screen and (max-width: 822px) {
+      display: none;
     }
   }
 } 
+
+.subnav {
+  background: #fff;
+  overflow-x: scroll;
+  padding: 20px 0;
+  white-space: nowrap;
+  z-index: 10;
+  border-top: 1px solid #cbcfd1;
+  border-bottom: 1px solid #cdccc0;
+
+  &__inner {
+    @include containerStyles;
+  }
+
+  &__item {
+    color: blue;
+
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+
+    &--active {
+      color: red;
+    }
+  }
+}
