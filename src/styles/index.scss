@@ -7,9 +7,22 @@ body {
   background: #e5e4db;
   font-family: 'Noto Sans', sans-serif;
   padding-bottom: 125px;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(255,255,255,.3) 40%, rgba(255,255,255,.3) 50%);
+  }
 
   @media screen and (min-width: $desktop-break) { 
-    padding-bottom: 0;
+    padding-bottom: 50px;
   }
 }
 
@@ -23,3 +36,4 @@ body {
 @import './layout.scss';
 @import './header.scss';
 @import './card.scss';
+@import './all-programs-table.scss';

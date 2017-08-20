@@ -13,10 +13,10 @@ const SingleProgram = (props) => {
   if (monthlySales.indexOf('.') === -1) {
     monthlySales += '.00';
   }
-
+  
   return (
     <tr>
-      <td>{props.program.Name}</td>
+      <td>{props.program.Name}<br /><span onclick={() => props.togglePricingTable(props.program.ProgramID)}>{props.state.visiblePricingTables[`id${props.program.ProgramID}`] ? 'less' : 'more'}</span></td>
       <td>${monthlySales}</td>
       <td>{commaPlacer(props.program.MonthlyAttendance)} visits</td>
     </tr>
