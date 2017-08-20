@@ -25,6 +25,10 @@
     position: absolute; 
     top: 28px;
     right: 7px;
+
+    @media screen and (min-width: $desktop-break) { 
+      display: none;
+    }
   }
 }
 
@@ -33,7 +37,9 @@
   padding: 0;
   
   &__tab:not(&__tab--active) {
-    display: none;
+    @media screen and (max-width: $desktop-break - 1) {
+      display: none;
+    }
   }
 
   &__tab--active {

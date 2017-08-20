@@ -55,8 +55,9 @@ app({
     programs: [],
     pricingOptions: [],
     visiblePricingTables: {},
+    activeNavId: 1,
+    activeSubNav: '',
   },
-
 
   events: {
     /**
@@ -107,12 +108,41 @@ app({
 
       return state;
     },
+
+
+    /**
+      @param {newNavId} - id of new nav item
+
+      Updates the current active nav item and resets subnav to use default
+    */
+    updateMainNav: (state, actions, newNavId) => {
+      if (newNavId !== state.activeNavId) {
+        state.activeNavId = newNavId;
+        state.activeSubNav = ''; // reset subnav to use default
+
+        return state;
+      }
+    },
+
+    /**
+      @param {newSubNavItem} - string of current subnav name
+    */
+    updateSubNav: (state, actions, newSubNavItem) => {
+      if (newSubNavItem !== state.activeSubNav) {
+        state.activeSubNav = newSubNavItem;
+
+        return state;
+      }
+    },
   },
 
 
   view: (state, actions) => (
     <div>
-      <Header />
+      <Header 
+        state={state} 
+        actions={actions} 
+      />
       <MainWrapper 
         state={state} 
         actions={actions} 

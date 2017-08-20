@@ -33,6 +33,11 @@
         font-weight: 400;
         font-size: 12px;
         color: #8a8a7a;
+        cursor: pointer;
+
+        &:hover {
+          color: lighten(#8a8a7a, 5%)
+        }
       }
     }
   }
