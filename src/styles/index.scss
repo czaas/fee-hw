@@ -1,7 +1,3 @@
-body {
-  margin: 0;
-}
-
 * {
   box-sizing: border-box;
   &:before, &:after {
@@ -9,3 +5,10 @@ body {
   }
 }
 
+@import './variables-mixins.scss';
+@import './fonts.scss';
+
+@import './layout.scss';
+@import './header.scss';
+@import './card.scss';
+@import './all-programs-table.scss';
