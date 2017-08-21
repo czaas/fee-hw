@@ -1,10 +1,18 @@
 .all-programs {
   text-align: left;
   border-collapse: collapse;
+  width: 100%;
+
   
   th, td {
     padding-right: 15px;
+    white-space: nowrap;
   }
+
+  tr td:last-child {
+    width: 100%;
+  }
+
   tr:first-child {
     border-bottom: 1px solid #e1e1d8;
     font-size: 11px;

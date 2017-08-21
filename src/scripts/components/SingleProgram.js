@@ -19,6 +19,7 @@ const SingleProgram = (props) => {
       <td>{props.program.Name}<br /><span onclick={() => props.togglePricingTable(props.program.ProgramID)}>{props.state.visiblePricingTables[`id${props.program.ProgramID}`] ? 'less' : 'more'}</span></td>
       <td>${monthlySales}</td>
       <td>{commaPlacer(props.program.MonthlyAttendance)} visits</td>
+      <td>&nbsp;</td>
     </tr>
   );
 };
