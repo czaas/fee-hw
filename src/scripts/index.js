@@ -35,16 +35,16 @@ const MainWrapper = (props) => (
           />
         ))}
       </div>
-      
-      <table class="all-programs">
-        <tr>
-          <th>All Programs</th>
-          <th>Monthly Sales</th>
-          <th>Monthly Attendance</th>
-          <td>&nbsp;</td>
-        </tr>
-        {props.state.programs.map((program) => <SingleProgram togglePricingTable={props.actions.togglePricingTable} state={props.state} program={program} />)}
-      </table>
+      <div class="all-programs-wrapper">
+        <table class="all-programs">
+          <tr>
+            <th>All Programs</th>
+            <th>Monthly Sales</th>
+            <th>Monthly Attendance</th>
+          </tr>
+          {props.state.programs.map((program) => <SingleProgram togglePricingTable={props.actions.togglePricingTable} state={props.state} program={program} />)}
+        </table>
+      </div>
     </main>
   </div>
 );
