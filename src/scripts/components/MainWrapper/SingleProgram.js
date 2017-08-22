@@ -4,7 +4,7 @@ import {
 
 import { 
   commaPlacer,
-} from './../util/commaPlacer.js';
+} from './../../util/commaPlacer.js';
 
 const SingleProgram = (props) => {
 
