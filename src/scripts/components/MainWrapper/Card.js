@@ -79,20 +79,20 @@ function SalesGraph(props) {
     var prevYear = props.prevYear[i];
 
     var bars = (
-      <div class="all-bars">
-        <div class="all-bars__set">
+      <div class="graph__item">
+        <div class="graph__item__bars">
           <div 
-            class="all-bars__set__bar all-bars__set__bar--prev" 
+            class="graph__item__bars__bar graph__item__bars__bar--prev" 
             value={`$${commaPlacer(currentYear)}`}
-            style={{ height: `${(currentYear / largestNumber) * maxHeight}px` }}
+            style={{ height: `${Math.floor((currentYear / largestNumber) * maxHeight)}px` }}
           />
           <div 
-            class="all-bars__set__bar all-bars__set__bar--current" 
+            class="graph__item__bars__bar graph__item__bars__bar--current" 
             value={`$${commaPlacer(prevYear)}`}
-            style={{ height: `${(prevYear / largestNumber) * maxHeight}px` }}
+            style={{ height: `${Math.floor((prevYear / largestNumber) * maxHeight)}px` }}
           />
         </div>
-        <div class="all-bars__month">{months[i]}</div>
+        <div class="graph__item__month">{months[i]}</div>
       </div>
     );
 
