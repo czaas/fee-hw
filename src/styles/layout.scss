@@ -1,0 +1,106 @@
+body {
+  min-width: 320px;
+  margin: 0;
+  background: #e5e4db;
+  font-family: 'Noto Sans', sans-serif;
+  padding-bottom: 125px;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(255,255,255,.3) 40%, rgba(255,255,255,.3) 50%);
+  }
+
+  @media screen and (min-width: $desktop-break) { 
+    padding-bottom: 50px;
+  }
+}
+
+.main-wrapper {
+  @include containerStyles;
+  
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  &__main {
+    flex: 1 1 100%;
+
+    @media screen and (min-width: $desktop-break) { 
+      padding-left: 66px;
+    }
+  }
+}
+
+.aside {
+  width: 75px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 67px;
+    margin-bottom: 7px;
+    
+    border-radius: .2rem;
+    background: #a1c589;
+    border: 1px solid #7e9e6c;
+    box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+
+    transition: background .2s ease-out, box-shadow .2s ease-out;
+
+    &:hover, &:active {
+      background: darken(#a1c589, 5%);
+      box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+
+  @media screen and (min-width: $desktop-break) {
+    position: static;
+    margin-top: 10.5px;
+  }
+}
+
+.cards {
+  display: flex; 
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  
+  margin: 0 auto 30.5px;
+  justify-content: center;
+
+  @media screen and (min-width: 574px) {
+    justify-content: flex-start;
+    max-width: 528px;
+  }
+
+  @media screen and (min-width: 850px) {
+    max-width: 777px;
+    &__card {
+      &:nth-child(3n+1) {
+        margin-left: 0;
+      }
+      &:nth-child(3n+3) {
+        margin-right: 0;
+      }
+    }
+  }
+}

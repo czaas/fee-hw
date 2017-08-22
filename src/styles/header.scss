@@ -1,0 +1,230 @@
+.header {
+  background: #edf7f3;
+  padding-top: 10px;
+  margin-bottom: 10.5px;
+  position: relative;
+
+  &__logo {
+    display: block;
+    position: relative;
+    text-indent: -104%;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 197px;
+    height: 51px;
+    background: url(/assets/logo.png) no-repeat top left;
+    background-size: contain;
+    margin: 0 auto 15px;
+  }
+
+  @media screen and (min-width: $desktop-break) {
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      max-width: 1134px;
+      margin: 0 auto;
+    }
+    &__logo {
+      margin: 0 15px 7px 30px;
+    }
+  }
+
+  @media screen and (max-width: 822px) {
+    &__main-nav {
+      display: inline-block;
+      width: 100%;
+      max-width: 75%;
+      margin-left: 20px;
+    }
+  }
+
+  &__main-nav {
+    @media screen and (min-width: 823px) {
+      width: 100%;
+      max-width: 822px;
+      margin: 0 auto;
+    }
+  }
+
+  &__mmenu-button {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 15px;
+  }
+
+  &__mmenu {
+    overflow: hidden;
+    height: 0;
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    max-width: calc(75% - 2px);
+    margin-left: 20px;
+    transition: height .2s ease-out;
+    border-left: 1px solid #b6c2c5;
+    border-right: 1px solid #b6c2c5;
+    left: 1px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #b6c2c5;
+        background: linear-gradient(to bottom, #fff, #eff2f1);
+        height: 44px;
+
+        &:first-child {
+          border-top: 1px solid  #b6c2c5;
+        }
+
+        &:hover {
+          background: linear-gradient(to bottom, #eff2f1, #fff);
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 823px) {
+    &__mmenu-button,
+    &__mmenu {
+      display: none !important;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 822px;
+  overflow: visible;
+  list-style: none;
+  border: 1px solid #d4e2e6;
+  border-bottom: none;
+  border-radius: .2rem .2rem 0 0;
+  height: 39px;
+  position: relative;
+  top: 0;
+
+  &__tab {
+    flex: 1 1 auto;
+    height: 39px;
+    display: inline-block;
+    text-align: center;
+    background: linear-gradient(to bottom, #fff, #eff2f1);
+    cursor: pointer;
+    padding: 9px 15px 8px;
+    position: relative;
+    color: #799c8a;
+    border-bottom: 1px solid #cbcfd1;
+
+    &:hover:not(&--active) {
+      background: linear-gradient(to bottom, #eff2f1, #fff);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      background: url(/assets/nav-border.png) no-repeat top left;
+      background-size: auto 100%;
+    }
+
+    &:last-child:after {
+      display: none;
+    }
+
+    &--active {
+      position: relative;
+      top: -4px;
+      color: #293741;
+      background: #fff;
+      height: 43px;
+      display: inline-block;
+
+      border-left: 1px solid #adb7bb;
+      border-top: 1px solid #b6c2c5;
+      border-right: 1px solid #a6b2b6;
+      border-bottom: none;
+      border-radius: .3rem .3rem 0 0;
+      cursor: default;
+
+      &:before,
+      &:after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        pointer-events: none;
+        z-index: 10;
+
+        background-image: url(/assets/selected-shadow-left.png);
+        background-repeat: no-repeat;
+        background-size: 6px 41px;
+      }
+      &:before {
+        background-position: top left;
+        left: -7px;
+      }
+      &:after {
+        right: -7px;
+
+        background-image: url(/assets/selected-shadow-right.png);
+        background-position: top right;
+      }
+
+      a {
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+  
+  &__tab:not(&__tab--active) {
+    @media screen and (max-width: 822px) {
+      display: none;
+    }
+  }
+} 
+
+.subnav {
+  background: #fff;
+  overflow-x: scroll;
+  padding: 20px 0;
+  white-space: nowrap;
+  z-index: 10;
+  border-top: 1px solid #cbe3d7;
+  border-bottom: 1px solid #cdccc0;
+
+  &__inner {
+    @include containerStyles;
+  }
+
+  &__item {
+    color: #777;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+    cursor: pointer;
+
+    &--active {
+      cursor: default;
+      color: #5e5e5e;
+      font-weight: bold;
+    }
+  }
+
+  @media screen and (min-width: $desktop-break) {
+    overflow: hidden;
+  }
+}
