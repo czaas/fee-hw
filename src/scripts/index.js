@@ -12,7 +12,7 @@ import {
 } from 'hyperapp';
 import 'whatwg-fetch';
 
-import Header from './components/Header.js';
+import Header from './components/Header/index.js';
 import MainWrapper from './components/MainWrapper/index.js';
 
 app({
