@@ -19,7 +19,10 @@ const Card = (props) => (
     </div>
     <p class="card__graph-sales">Sales by month</p>
 
-    <img class="card__graph" src={'/assets/graph.png'} />
+    <SalesGraph 
+      currentYear={props.program.Sales.CurrentYear}
+      prevYear={props.program.Sales.PreviousYear}
+    />
 
     <section class="card__current-sales">
       <table class="card__current-sales__table" cellspacing="0" cellpadding="0">
@@ -48,7 +51,63 @@ const Card = (props) => (
   </div>
 );
 
+/**
+  @param {props.currentYear} - Current year sales
+  @param {props.prevYear} - Previous year sales
+*/
+function SalesGraph(props) {
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
 
+  var setOfBars = [];
+  var maxHeight = 72;
+  var largestNumber = 0;
+
+  props.prevYear.forEach(prev => {
+    if (prev > largestNumber) {
+      largestNumber = prev;
+    }
+  });
+
+  props.currentYear.forEach(current => {
+    if (current > largestNumber) {
+      largestNumber = current;
+    }
+  });
+
+  for (var i = 0; i < props.currentYear.length; i++) {
+    var currentYear = props.currentYear[i];
+    var prevYear = props.prevYear[i];
+
+    var bars = (
+      <div class="all-bars">
+        <div class="all-bars__set">
+          <div 
+            class="all-bars__set__bar all-bars__set__bar--prev" 
+            value={`$${commaPlacer(currentYear)}`}
+            style={{ height: `${(currentYear / largestNumber) * maxHeight}px` }}
+          />
+          <div 
+            class="all-bars__set__bar all-bars__set__bar--current" 
+            value={`$${commaPlacer(prevYear)}`}
+            style={{ height: `${(prevYear / largestNumber) * maxHeight}px` }}
+          />
+        </div>
+        <div class="all-bars__month">{months[i]}</div>
+      </div>
+    );
+
+
+    setOfBars.push(bars);
+  }
+
+  return (
+    <div 
+      class="graph"
+    >
+      {setOfBars}
+    </div>
+  );
+}
 
 function PricingOptionTable(props) {
   var currentOptions = props.pricingOptions.filter((eachOption) => eachOption.ProgramID === parseInt(props.ProgramID, 10));
