@@ -56,7 +56,7 @@ const Card = (props) => (
   @param {props.prevYear} - Previous year sales
 */
 function SalesGraph(props) {
-  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   var setOfBars = [];
   var maxHeight = 72;
