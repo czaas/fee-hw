@@ -175,8 +175,13 @@ app({
     },
 
 
+    /*
+    # Adding new program.
 
+    Takes js obejct schema and merges with state for UI schema and merges into state as new object
+    */
     addNewProgram: (state, actions) => {
+
       var nextProgramID = 0;
 
       state.programs.forEach((program) => {

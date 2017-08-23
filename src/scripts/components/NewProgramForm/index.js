@@ -19,14 +19,17 @@ const programsAvailable = [
 
 const NewProgramForm = (props) => {
 
-  var programTypesAvailable = programTypes.map(type => <a onclick={() => props.actions.newProgram.setProgramType(type)}>{type}</a>);
+  var programTypesAvailable = programTypes.map(type => <a class="new-program__form__button" onclick={() => props.actions.newProgram.setProgramType(type)}>{type}</a>);
 
   var programsAvailableCheckboxes = programsAvailable.map((programName) => (
     <label>
-      {programName}
       <input name={programName} checked={(props.state.tabsProgramIsOn.indexOf(programName) !== -1)} type="checkbox" value={programName} onchange={tabChanged} />
+      {programName}
     </label>
   ));
+
+
+
 
   function saveName(e) {
     if (e) { e.preventDefault(); }
@@ -59,45 +62,71 @@ const NewProgramForm = (props) => {
     }
   }
 
+
+
+
   return (
     <div class={`new-program ${props.state.isOpen ? 'new-program--active' : 'new-program--hidden'}`}>
       <div class="new-program__bg" onclick={() => props.actions.toggleForm(false)} />
       <div class="new-program__form">
-        <div class="new-program__form__part-one">
-          <p>Choose one program type</p>
 
+        {/** ==================
+          # part one of form
+          
+          Must select one 
+         ================== */}
+
+        <p style={{ textAlign: 'center' }}>Choose one program type</p>
+
+        <div class="new-program__form__part new-program__form__part--one">
           {programTypesAvailable}
         </div>
-        <div class={`new-program__form__part-two ${ (props.state.programType === "") ? "disabled" : "" }`}>
+
+
+        {/** ==================
+          second part of form
+         ================== */}
+        <div class={`new-program__form__part new-program__form__part--two disabled-until-state ${ (props.state.programType !== "") ? "" : "disabled-until-state--disabled" }`} data-message="Choose One Program Type">
           
           <form onsubmit={saveName}>
-            <label>
+            <label class="new-program__form__part__name">
               Program Name
               <input type="text" id="programName" onchange={saveName} value={props.state.Name} />
             </label>
           </form>
           
-          <form onchange={onlineScheduling}>
-            Allow Online Scheduling?
-            <label>
-              Yes <input type="radio" name="online-scheduling" value="true" checked={props.state.onlineScheduling} onchange={onlineScheduling} />
-            </label>
-            <label>
-              No <input type="radio" name="online-scheduling" value="false" checked={!props.state.onlineScheduling} onchange={onlineScheduling} />
-            </label>
-          </form>
+          <div class={`disabled-until-state ${ props.state.Name !== '' ? '' : 'disabled-until-state--disabled' }`}  data-message="Enter Program Name">
+            <form onchange={onlineScheduling}>
+              <p>Allow Online Scheduling?</p>
 
-          <form>
-            Default Capactiy <input type="number" defaultValue={props.state.capacity} onblur={defaultCapacity} />
-          </form>
+              <div class="new-program__form__part__online-scheduling">
+                <label>
+                  Yes <input type="radio" name="online-scheduling" value="true" checked={props.state.onlineScheduling} onselect={onlineScheduling} />
+                </label>
+                <label>
+                  No <input type="radio" name="online-scheduling" value="false" checked={!props.state.onlineScheduling} onselect={onlineScheduling} />
+                </label>
+              </div>
+            </form>
 
-          <form>
-            Tabs this program is on: 
-            <span>Choose as many as you would like</span>
-            {programsAvailableCheckboxes}
-          </form>
+            <form class="block-element">
+              <label class="new-program__form__part__name">
+                Default Capactiy <input type="number" defaultValue="10" onblur={defaultCapacity} />
+              </label>
+            </form>
 
-          <a onclick={props.actions.addNewProgram}>Add New Program</a>
+            <form>
+                Tabs this program is on:
+                <span class="hint">Choose as many as you would like</span>
+              <div class="checkboxes block-element">
+                {programsAvailableCheckboxes}
+              </div>
+            </form>
+
+            <form>
+              <a class="new-program__form__button new-program__form__button--add" onclick={props.actions.addNewProgram}>Add New Program</a>
+            </form>
+          </div>
         </div>
       </div>
     </div>
