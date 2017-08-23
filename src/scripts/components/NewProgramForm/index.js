@@ -92,6 +92,7 @@ const NewProgramForm = (props) => {
             <label class="new-program__form__part__name">
               Program Name
               <input type="text" id="programName" onchange={saveName} value={props.state.Name} />
+              <button>Save</button>
             </label>
           </form>
           
