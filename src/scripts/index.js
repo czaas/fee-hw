@@ -14,17 +14,36 @@ import 'whatwg-fetch';
 
 import Header from './components/Header/index.js';
 import MainWrapper from './components/MainWrapper/index.js';
+import NewProgramForm from './components/NewProgramForm/index.js';
 
 app({
   root: document.getElementById('mount'),
 
   state: {
-    programs: [],
+    programs: [{
+        "ProgramID": 32,
+        "Name": "TEST",
+        "TotalMonthlySales": 0,
+        "MonthlyAttendance": 0,
+        "Sales": {
+          "CurrentYear": [0,0,0,0,0,0],
+          "PreviousYear": [0,0,0,0,0,0]
+        }
+      }],
     pricingOptions: [],
     visiblePricingTables: {},
     activeNavId: 1,
     activeSubNav: '',
     mmenuOpen: false,
+
+    addNewProgram: {
+      isOpen: false,
+      programType: '',
+      Name: '',
+      onlineScheduling: true,
+      capacity: 10,
+      tabsProgramIsOn: [],
+    },
   },
 
   events: {
@@ -46,6 +65,10 @@ app({
           actions.updatePricingOptions(pricingData);
         });
     },
+
+    update: (state) => {
+      console.log(state);
+    }
   },
 
 
@@ -118,19 +141,141 @@ app({
 
       return state;
     },
+
+
+    /**
+      @param {force} - optional boolean to force form to be open/close 
+    */
+    toggleForm: (state, actions, force) => {
+      if (force !== undefined) {
+        state.addNewProgram.isOpen = force;
+      } else {
+        state.addNewProgram.isOpen = !state.addNewProgram.isOpen;
+      }
+
+
+      if (!state.addNewProgram.isOpen) {
+        actions.resetNewProgramForm();
+      }
+
+      return state;
+    },
+
+    resetNewProgramForm: (state, actions) => {
+      state.addNewProgram = {
+        isOpen: state.addNewProgram.isOpen,
+        programType: '',
+        Name: '',
+        onlineScheduling: true,
+        amountOfStudents: 10,
+        tabsProgramIsOn: [],
+      };
+
+      return state;
+    },
+
+
+
+    addNewProgram: (state, actions) => {
+      var nextProgramID = 0;
+
+      state.programs.forEach((program) => {
+        if (program.ProgramID > 0) {
+          nextProgramID = program.ProgramID;
+        }
+      });
+
+      var program = {
+        "ProgramID": nextProgramID + 1,
+        "Name": "",
+        "TotalMonthlySales": 0,
+        "MonthlyAttendance": 0,
+        "Sales": {
+          "CurrentYear": [0,0,0,0,0,0],
+          "PreviousYear": [0,0,0,0,0,0],
+        }
+      };
+
+      var newProgram = Object.assign({}, program, state.addNewProgram);
+
+      actions.updatePrograms([newProgram]);
+      actions.toggleForm(false);
+    },
+
+    newProgram: {
+      /**
+      @param {programType} - String of program type
+      */
+      setProgramType: (state, actions, programType) => {
+        state.addNewProgram.programType = programType;
+
+        return state;
+      },
+
+      /**
+      @param {programName} - String of program name
+      */
+      setProgramName: (state, actions, programName) => {
+        state.addNewProgram.Name = programName;
+
+        return state;
+      },
+
+      /**
+      @param {bool} - boolean on whether to set online scheduling
+      */
+      setOnlineScheduling: (state, actions, bool) => {
+        state.addNewProgram.onlineScheduling = (bool === 'true');
+
+        return state;
+      },
+
+      /**
+      @param {capacity} - number of default capacity
+      */
+      setDefaultCapacity: (state, actions, capacity) => {
+        state.addNewProgram.capacity = capacity;
+
+        return state;
+      },
+
+      /**
+        @param {tabName} - Name of tab to be added to array
+      */
+      addTab: (state, actions, tabName) => {
+        state.addNewProgram.tabsProgramIsOn.push(tabName);
+        return state;
+      },
+
+      /**
+        @param {tabName} - Name of tab to be removed from array
+      */
+      removeTab: (state, actions, tabName) => {
+        var indexOfTab = state.addNewProgram.tabsProgramIsOn.indexOf(tabName);
+        state.addNewProgram.tabsProgramIsOn.splice(indexOfTab, 1);
+
+        return state;
+      },
+    },
   },
 
 
-  view: (state, actions) => (
-    <div>
-      <Header 
-        state={state} 
-        actions={actions} 
-      />
-      <MainWrapper 
-        state={state} 
-        actions={actions} 
-      />
-    </div>
-  ),
+  view: (state, actions) => {
+    return (
+      <div class="app" style={{ overflow: state.addNewProgram.isOpen ? 'hidden' : 'auto' }}>
+        <Header 
+          state={state} 
+          actions={actions} 
+        />
+        <MainWrapper 
+          state={state} 
+          actions={actions} 
+        />
+        <NewProgramForm 
+          state={state.addNewProgram}
+          actions={actions} 
+        />
+      </div>
+    );
+  },
 });

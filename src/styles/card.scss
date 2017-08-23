@@ -149,6 +149,7 @@
     width: 100%;
     justify-content: space-between;
     padding: 6px 0;
+    min-height: 104px;
 
     &__item {
       display: flex;
@@ -167,6 +168,7 @@
         &__bar {
           width: 7px;
           position: relative;
+          min-height: 1px;
 
           &--prev {
             background: #ccbcdd;
