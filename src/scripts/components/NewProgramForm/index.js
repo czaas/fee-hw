@@ -19,7 +19,14 @@ const programsAvailable = [
 
 const NewProgramForm = (props) => {
 
-  var programTypesAvailable = programTypes.map(type => <a class="new-program__form__button" onclick={() => props.actions.newProgram.setProgramType(type)}>{type}</a>);
+  var programTypesAvailable = programTypes.map(type => (
+    <a 
+      class={`new-program__form__button ${ props.state.programType === type ? 'new-program__form__button--active' : '' }`} 
+      onclick={() => props.actions.newProgram.setProgramType(type)}
+    >
+      {type}
+    </a>
+  ));
 
   var programsAvailableCheckboxes = programsAvailable.map((programName) => (
     <label>
