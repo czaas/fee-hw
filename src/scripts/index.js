@@ -148,6 +148,9 @@ app({
         actions.resetNewProgramForm();
         // reset scroll position
         document.getElementById('form-container').scrollTop = 0;
+        document.body.style.overflow = 'auto';
+      } else {
+        document.body.style.overflow = 'hidden';
       }
 
       return state;
