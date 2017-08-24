@@ -84,6 +84,17 @@ body {
   margin: 0 auto 30.5px;
   justify-content: center;
 
+  &--noprograms {
+    text-align: center;
+    &:before {
+      display: block;
+      width: 100%;
+      content: 'There are currently no programs';
+      padding: 20px 0;
+      color: darken(#cbcfd1, 10%);
+    }
+  }
+
   @media screen and (min-width: 579px) {
     justify-content: flex-start;
     max-width: 532px;

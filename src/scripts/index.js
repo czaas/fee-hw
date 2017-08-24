@@ -169,6 +169,19 @@ app({
       return state;
     },
 
+    /*
+    @param {programID} - id of program to be deleted
+    */
+    deleteProgram: (state, actions, programID) => {
+      var confirmDelete = confirm('Are you sure? There is no undo.');
+
+      if (confirmDelete) {
+        var remainingPrograms = state.programs.filter((program) => program.ProgramID !== programID);
+
+        state.programs = remainingPrograms;
+        return state;
+      }
+    },
 
     /*
     # Adding new program.
