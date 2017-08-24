@@ -33,19 +33,12 @@
         opacity: 0;
         pointer-events: none;
         position: relative;
-        right: -21px;
+        right: 5px;
         text-align: center;
         cursor: pointer;
-        transition: right .2s ease-out;
 
         svg {
-          fill: #ababaa;
-        }
-
-        &:hover {
-          svg {
-            fill: #ff0000;
-          }
+          fill: #ff0000;
         }
       }
 
@@ -70,7 +63,6 @@
         .card__top__edit__trash {
           opacity: 1;
           pointer-events: auto;
-          right: 5px;
         }
       }
     }
