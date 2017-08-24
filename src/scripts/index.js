@@ -20,16 +20,7 @@ app({
   root: document.getElementById('mount'),
 
   state: {
-    programs: [{
-        "ProgramID": 32,
-        "Name": "TEST",
-        "TotalMonthlySales": 0,
-        "MonthlyAttendance": 0,
-        "Sales": {
-          "CurrentYear": [0,0,0,0,0,0],
-          "PreviousYear": [0,0,0,0,0,0]
-        }
-      }],
+    programs: [],
     pricingOptions: [],
     visiblePricingTables: {},
     activeNavId: 1,
