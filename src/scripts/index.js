@@ -148,6 +148,9 @@ app({
         actions.resetNewProgramForm();
         // reset scroll position
         document.getElementById('form-container').scrollTop = 0;
+        document.body.style.overflow = 'auto';
+      } else {
+        document.body.style.overflow = 'hidden';
       }
 
       return state;
@@ -166,6 +169,19 @@ app({
       return state;
     },
 
+    /*
+    @param {programID} - id of program to be deleted
+    */
+    deleteProgram: (state, actions, programID) => {
+      var confirmDelete = confirm('Are you sure? There is no undo.');
+
+      if (confirmDelete) {
+        var remainingPrograms = state.programs.filter((program) => program.ProgramID !== programID);
+
+        state.programs = remainingPrograms;
+        return state;
+      }
+    },
 
     /*
     # Adding new program.

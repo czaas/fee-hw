@@ -20,20 +20,50 @@
     }
 
     &__edit {
+      display: flex;
+      justify-content: flex-end;
       flex: 1 0 21px;
-      max-width: 21px;
-      width: 21px;
-      height: 19px;
-      border-radius: .2rem;
-      border: 1px solid #f4f4f2;
 
-      background: #fcfcfa url(/assets/pencil_icons.png) no-repeat top left;
-      background-size: 17px 32px;
-      cursor: pointer;
-      background-position: 0 -16px;
+      &__trash {
+        width: 21px;
+        height: 19px;
+        border-radius: .2rem;
+        border: 1px solid #f4f4f2;
+        z-index: 1;
+        opacity: 0;
+        pointer-events: none;
+        position: relative;
+        right: 5px;
+        text-align: center;
+        cursor: pointer;
+
+        svg {
+          fill: #ff0000;
+        }
+      }
+
+      &__pencil {
+        max-width: 21px;
+        width: 21px;
+        height: 19px;
+        border-radius: .2rem;
+        border: 1px solid #f4f4f2;
+
+        background: #fcfcfa url(/assets/pencil_icons.png) no-repeat top left;
+        background-size: 17px 32px;
+        cursor: pointer;
+        background-position: 0 -16px;
+
+        &:hover {
+          background-position: 0 0;
+        }
+      }
 
       &:hover {
-        background-position: 0 0;
+        .card__top__edit__trash {
+          opacity: 1;
+          pointer-events: auto;
+        }
       }
     }
   }

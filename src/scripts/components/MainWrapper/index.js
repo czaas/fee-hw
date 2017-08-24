@@ -12,13 +12,14 @@ const MainWrapper = (props) => (
         New Program
     </aside>
     <main class="main-wrapper__main main">
-      <div class="cards">
+      <div class={`cards ${ props.state.programs.length === 0 ? 'cards--noprograms' : '' }`}>
         {props.state.programs.map((program) => (
           <Card 
             program={program} 
             pricingOptions={props.state.pricingOptions}
             togglePricingTable={props.actions.togglePricingTable} 
             visiblePricingTables={props.state.visiblePricingTables} 
+            deleteProgram={props.actions.deleteProgram}
           />
         ))}
       </div>
