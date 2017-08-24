@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 245px;
   padding: 20px 20px 8px;
-  margin: 10.5px 9.5px;
+  margin: 10.5px 10.5px;
 
   background: #fff;
   border-radius: .2rem;
@@ -30,9 +30,10 @@
       background: #fcfcfa url(/assets/pencil_icons.png) no-repeat top left;
       background-size: 17px 32px;
       cursor: pointer;
+      background-position: 0 -16px;
 
       &:hover {
-        background-position: 0 -16px;
+        background-position: 0 0;
       }
     }
   }
@@ -41,9 +42,6 @@
     font-size: 12px;
     color: #bebeb5;
     margin: 12px 0 0;
-  }
-  &__graph {
-    width: 100%;
   }
 
   &__current-sales {
@@ -143,6 +141,63 @@
       &__multi-graph {
         min-width: 65px;
         height: 100%;
+      }
+    }
+  }
+
+  .graph {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 6px 0;
+    min-height: 104px;
+
+    &__item {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      flex: 0 0 15px;
+      align-items: center;
+      &__bars {
+        flex: 1;
+        align-items: flex-end;
+        width: 15px;
+        white-space: nowrap;
+        overflow: visible;
+        display: flex;
+        justify-content: space-between;
+        &__bar {
+          width: 7px;
+          position: relative;
+          min-height: 1px;
+
+          &--prev {
+            background: #ccbcdd;
+          }
+          &--current {
+            background: #b6d8b9;
+          }
+
+          &:hover {
+            &:after {
+              content: attr(value);
+              position: absolute;
+              top: 0;
+              padding: 3px;
+              background: #fff;
+              border: 1px solid #ddd;
+              z-index: 10;
+            }
+          }
+        }
+      }
+      &__month {
+        flex: 0 0 20px;
+        height: 20px;
+        font-size: 12px;
+        text-align: center;
+        color: #a1a18d;
+        padding: 3px 0 0;
       }
     }
   }
