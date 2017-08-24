@@ -40,15 +40,22 @@
     box-shadow: 1px 1px 20px 0px rgba(4,4,4, 0.4);
 
     &__part {
-      padding: 15px;
       position: relative;
+      border-bottom: 1px solid #ddd;
+
+      &__inner {
+        padding: 15px;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
 
       form {
         transition: opacity 100ms ease-out;
       }
 
       &--one {
-        border-bottom: 1px solid #ddd;
         display: flex;
         justify-content: space-around;
 
@@ -58,27 +65,6 @@
       }
 
       &--two {
-        box-shadow: inset 0px 0px 27px -5px rgba(#333, 0);
-        transition: box-shadow .2s ease-out;
-
-        &.disabled:hover {
-          box-shadow: inset 0px 0px 27px -5px rgba(#333, 1);
-          &:before {
-            content: attr(data-choose);
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);  
-            padding: 3px;
-            background: #fff;
-            border: 1px solid #ddd;
-            z-index: 10;
-            box-shadow: 0px 0px 9px 0px rgba(#444, .6);
-            width: 210px;
-            text-align: center;
-          }
-        }
-
          form > label {
           display: flex;
           flex-direction: row;
@@ -102,9 +88,12 @@
         justify-content: center;
 
         label {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           margin: 0 1em;
           width: 80%;
-          padding: 10px 0;
+          height: 44px;
           text-align: center;
           border: 1px solid #b6c2c5;
         }
@@ -191,6 +180,7 @@
     box-shadow: inset 0px 0px 27px -5px rgba(#333, 0);
     transition: box-shadow .2s ease-out;
     cursor: not-allowed;
+    background: #efefef;
 
     & > * {
       opacity: .5;

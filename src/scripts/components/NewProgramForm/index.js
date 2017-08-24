@@ -75,65 +75,59 @@ const NewProgramForm = (props) => {
   return (
     <div class={`new-program ${props.state.isOpen ? 'new-program--active' : 'new-program--hidden'}`}>
       <div class="new-program__bg" onclick={() => props.actions.toggleForm(false)} />
-      <div class="new-program__form">
-
-        {/** ==================
-          # part one of form
-          
-          Must select one 
-         ================== */}
+      <div class="new-program__form" id="form-container">
 
         <p style={{ textAlign: 'center' }}>Choose one program type</p>
 
-        <div class="new-program__form__part new-program__form__part--one">
+        <div class="new-program__form__part new-program__form__part--one new-program__form__part__inner">
           {programTypesAvailable}
         </div>
 
-
-        {/** ==================
-          second part of form
-         ================== */}
-        <div class={`new-program__form__part new-program__form__part--two disabled-until-state ${ (props.state.programType !== "") ? "" : "disabled-until-state--disabled" }`} data-message="Choose One Program Type">
+        <div class={`disabled-until-state ${ (props.state.programType !== "") ? "" : "disabled-until-state--disabled" }`} data-message="Choose One Program Type">
           
-          <form onsubmit={saveName}>
-            <label class="new-program__form__part__name">
-              Program Name
-              <input type="text" id="programName" onchange={saveName} value={props.state.Name} />
-              <button>Save</button>
-            </label>
-          </form>
-          
-          <div class={`disabled-until-state ${ props.state.Name !== '' ? '' : 'disabled-until-state--disabled' }`}  data-message="Enter Program Name">
-            <form onchange={onlineScheduling}>
-              <p>Allow Online Scheduling?</p>
-
-              <div class="new-program__form__part__online-scheduling">
-                <label>
-                  Yes <input type="radio" name="online-scheduling" value="true" checked={props.state.onlineScheduling} onselect={onlineScheduling} />
-                </label>
-                <label>
-                  No <input type="radio" name="online-scheduling" value="false" checked={!props.state.onlineScheduling} onselect={onlineScheduling} />
-                </label>
-              </div>
-            </form>
-
-            <form class="block-element">
+          <div class="new-program__form__part new-program__form__part--two">
+            <form onsubmit={saveName} class="new-program__form__part__inner">
               <label class="new-program__form__part__name">
-                Default Capactiy <input type="number" defaultValue="10" onblur={defaultCapacity} />
+                Program Name
+                <input type="text" id="programName" onchange={saveName} value={props.state.Name} />
+                <button>Save</button>
               </label>
             </form>
+          </div>
 
-            <form>
-                Tabs this program is on:
-                <span class="hint">Choose as many as you would like</span>
-              <div class="checkboxes block-element">
-                {programsAvailableCheckboxes}
-              </div>
-            </form>
+          <div class="new-program__form__part new-program__form__part--two">
+            <div class={`new-program__form__part__inner disabled-until-state ${ props.state.Name !== '' ? '' : 'disabled-until-state--disabled' }`}  data-message="Enter Program Name">
+              <form onchange={onlineScheduling}>
+                <p>Allow Online Scheduling?</p>
 
-            <form>
-              <a class="new-program__form__button new-program__form__button--add" onclick={props.actions.addNewProgram}>Add New Program</a>
-            </form>
+                <div class="new-program__form__part__online-scheduling">
+                  <label>
+                    Yes <input type="radio" name="online-scheduling" value="true" checked={props.state.onlineScheduling} onselect={onlineScheduling} />
+                  </label>
+                  <label>
+                    No <input type="radio" name="online-scheduling" value="false" checked={!props.state.onlineScheduling} onselect={onlineScheduling} />
+                  </label>
+                </div>
+              </form>
+
+              <form class="block-element">
+                <label class="new-program__form__part__name">
+                  Default Capactiy <input type="number" defaultValue="10" onblur={defaultCapacity} />
+                </label>
+              </form>
+
+              <form>
+                  Tabs this program is on:
+                  <span class="hint">Choose as many as you would like</span>
+                <div class="checkboxes block-element">
+                  {programsAvailableCheckboxes}
+                </div>
+              </form>
+
+              <form>
+                <a class="new-program__form__button new-program__form__button--add" onclick={props.actions.addNewProgram}>Add New Program</a>
+              </form>
+            </div>
           </div>
         </div>
       </div>

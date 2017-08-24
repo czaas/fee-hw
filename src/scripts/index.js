@@ -65,10 +65,6 @@ app({
           actions.updatePricingOptions(pricingData);
         });
     },
-
-    update: (state) => {
-      console.log(state);
-    }
   },
 
 
@@ -107,11 +103,14 @@ app({
       Updates the current active nav item and resets subnav to use default
     */
     updateMainNav: (state, actions, newNavId) => {
+      
+      if (state.mmenuOpen) {
+        actions.toggleMmenu(false);
+      }
+
       if (newNavId !== state.activeNavId) {
         state.activeNavId = newNavId;
         state.activeSubNav = ''; // reset subnav to use default
-
-        actions.toggleMmenu(false);
 
         return state;
       }
@@ -156,6 +155,8 @@ app({
 
       if (!state.addNewProgram.isOpen) {
         actions.resetNewProgramForm();
+        // reset scroll position
+        document.getElementById('form-container').scrollTop = 0;
       }
 
       return state;
