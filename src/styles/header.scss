@@ -65,6 +65,8 @@
     border-left: 1px solid #b6c2c5;
     border-right: 1px solid #b6c2c5;
     left: 1px;
+    z-index: 10;
+    box-shadow: 2px 4px 8px 0px rgba(#444, .3);
 
     ul {
       list-style: none;

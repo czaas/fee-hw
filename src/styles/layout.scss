@@ -1,9 +1,5 @@
 body {
-  min-width: 320px;
-  margin: 0;
-  background: #e5e4db;
-  font-family: 'Noto Sans', sans-serif;
-  padding-bottom: 125px;
+  background: #d6d5c8;
   position: relative;
 
   &:before {
@@ -15,8 +11,15 @@ body {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    background: radial-gradient(circle at center, rgba(255,255,255,.3) 40%, rgba(255,255,255,.3) 50%);
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 40%, rgba(255, 255, 255, 0.4) 50%);
   }
+}
+
+.app {
+  min-width: 320px;
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+  padding-bottom: 125px;
 
   @media screen and (min-width: $desktop-break) { 
     padding-bottom: 50px;
@@ -34,7 +37,7 @@ body {
     flex: 1 1 100%;
 
     @media screen and (min-width: $desktop-break) { 
-      padding-left: 66px;
+      padding-left: 65px;
     }
   }
 }
@@ -47,6 +50,7 @@ body {
   font-size: 12px;
   text-align: center;
   white-space: nowrap;
+  z-index: 11;
 
   &__button {
     display: flex;
@@ -87,9 +91,9 @@ body {
   margin: 0 auto 30.5px;
   justify-content: center;
 
-  @media screen and (min-width: 574px) {
+  @media screen and (min-width: 579px) {
     justify-content: flex-start;
-    max-width: 528px;
+    max-width: 532px;
   }
 
   @media screen and (min-width: 850px) {

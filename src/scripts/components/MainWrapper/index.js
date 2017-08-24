@@ -8,7 +8,7 @@ import SingleProgram from './SingleProgram.js';
 const MainWrapper = (props) => (
   <div class="main-wrapper">
     <aside class="main-wrapper__aside aside">
-        <a class="aside__button"><img src={'/assets/plus_icon.png'} /></a>
+        <a class="aside__button" onclick={() => props.actions.toggleForm(true)}><img src={'/assets/plus_icon.png'} /></a>
         New Program
     </aside>
     <main class="main-wrapper__main main">
