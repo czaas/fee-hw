@@ -1,26 +1,14 @@
 body {
   background: #d6d5c8;
-  position: relative;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 40%, rgba(255, 255, 255, 0.4) 50%);
-  }
 }
 
 .app {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 40%, rgba(255, 255, 255, 0.4) 50%);
   min-width: 320px;
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
   padding-bottom: 125px;
-
+  z-index: 2;
   @media screen and (min-width: $desktop-break) { 
     padding-bottom: 50px;
   }
